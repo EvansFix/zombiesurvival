@@ -4167,6 +4167,11 @@ function GM:PlayerSwitchFlashlight(pl, newstate)
 	return false
 end
 
+
+hook.Add("PlayerSpray", "DisablePlayerSpray", function(ply)
+	return !ply:IsAdmin()
+end)
+
 function GM:PlayerStepSoundTime(pl, iType, bWalking)
 	return 350
 end
