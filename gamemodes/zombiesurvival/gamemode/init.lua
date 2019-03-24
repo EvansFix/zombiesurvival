@@ -742,6 +742,13 @@ local playermins = Vector(-17, -17, 0)
 local playermaxs = Vector(17, 17, 4)
 local LastSpawnPoints = {}
 
+local spawn_blockers = {
+	prop_physics = true,
+	prop_physics_override = true,
+	prop_physics_multiplayer = true,
+	prop_dynamic = true
+}
+
 function GM:PlayerSelectSpawn(pl)
 	local spawninplayer = false
 	local teamid = pl:Team()
@@ -818,7 +825,7 @@ function GM:PlayerSelectSpawn(pl)
 				if not self.ObjectiveMap or teamid == TEAM_UNDEAD then
 					local spawnpos = spawn:GetPos()
 					for _, ent in pairs(ents.FindInBox(spawnpos + playermins, spawnpos + playermaxs)) do
-						if not spawninplayer and IsValid(ent) and ent:IsPlayer() or string.sub(ent:GetClass(), 1, 5) == "prop_" then
+						if not spawninplayer and IsValid(ent) and ent:IsPlayer() or spawn_blockers[ent:GetClass()] then
 							blocked = true
 							break
 						end
