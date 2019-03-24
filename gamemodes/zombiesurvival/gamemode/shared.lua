@@ -220,7 +220,7 @@ end
 function GM:FixWeaponBase()
 	local base = weapons.GetStored("weapon_base")
 
-	base.TranslateActivity = function(me)
+	base.TranslateActivity = function(me, act)
 		if me.ActivityTranslate[act] ~= nil then
 			return me.ActivityTranslate[act]
 		end
