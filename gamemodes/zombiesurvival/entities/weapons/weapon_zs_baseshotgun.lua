@@ -132,7 +132,7 @@ function SWEP:IsReloading()
 end
 
 function SWEP:CanReload()
-	return self:Clip1() < self.Primary.ClipSize and 0 < self:GetOwner():GetAmmoCount(self.Primary.Ammo)
+	return self:Clip1() < self:GetPrimaryClipSize() and 0 < self:GetOwner():GetAmmoCount(self.Primary.Ammo)
 end
 
 function SWEP:CanPrimaryAttack()

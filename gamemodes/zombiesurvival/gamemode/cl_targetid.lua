@@ -108,7 +108,14 @@ function GM:DrawSigilTargetHint(ent, fade)
 	draw.SimpleTextBlur("Sigil", "ZSHUDFontSmaller", x, y, colTemp, TEXT_ALIGN_CENTER)
 	y = y + draw.GetFontHeight("ZSHUDFontSmaller") + 0
 
-	draw.SimpleTextBlur("Press E to teleport", "ZSHUDFontTiny", x, y, colTemp, TEXT_ALIGN_CENTER)
+    if not ent.GetSigilIsCorrupted or not ent:GetSigilIsCorrupted() then
+        draw.SimpleTextBlur("Press E to teleport", "ZSHUDFontTiny", x, y, colTemp, TEXT_ALIGN_CENTER)
+        y = y + draw.GetFontHeight("ZSHUDFontTiny") + 0
+
+        if GAMEMODE:PlayerCanPurchase(MySelf) then
+            draw.SimpleTextBlur("Press F2 to purchase", "ZSHUDFontTiny", x, y, colTemp, TEXT_ALIGN_CENTER)
+        end
+    end
 end
 
 GM.TraceTarget = NULL

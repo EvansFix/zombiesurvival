@@ -98,7 +98,7 @@ function ENT:Use(activator, caller)
 
 	if activator:Team() == TEAM_HUMAN then
 		if self:GetObjectOwner():IsValid() then
-			if activator:GetInfo("zs_nousetodeposit") == "0" then
+			if activator:GetInfo("zs_nousetodeposit") == "0" or activator == self:GetObjectOwner() then
 				local curammo = self:GetAmmo()
 				local togive = math.min(math.min(15, activator:GetAmmoCount("pulse")), self.MaxAmmo - curammo)
 				if togive > 0 then
@@ -179,6 +179,9 @@ function ENT:Think()
 			util.Effect("nailrepaired", effectdata, true, true)
 
 			self:SetAmmo(self:GetAmmo() - 1)
+            if self:GetAmmo() == 0 then
+				owner:SendDeployableOutOfAmmoMessage(self)
+			end
 
 			count = count + 1
 

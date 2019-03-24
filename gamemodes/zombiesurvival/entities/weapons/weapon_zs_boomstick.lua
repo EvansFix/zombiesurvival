@@ -62,7 +62,7 @@ function SWEP:PrimaryAttack()
 
 	local owner = self:GetOwner()
 
-	self:SetNextPrimaryFire(CurTime() + self.Primary.Delay)
+	self:SetNextPrimaryFire(CurTime() + self:GetFireDelay())
 	self:EmitSound(self.Primary.Sound)
 
 	local clip = self:Clip1()

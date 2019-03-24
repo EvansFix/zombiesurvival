@@ -59,7 +59,7 @@ end
 
 function SWEP:PrimaryAttack()
 	if not self:CanPrimaryAttack() then return end
-	self:SetNextPrimaryFire(CurTime() + self.Primary.Delay)
+	self:SetNextPrimaryFire(CurTime() + self:GetFireDelay())
 	self:EmitFireSound()
 
 	local altuse = self:GetAltUsage()

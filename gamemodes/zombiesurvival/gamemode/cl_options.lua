@@ -44,7 +44,8 @@ GM.AmmoToPurchaseNames = {
 	["pulse"] = "pulseammo",
 	["XBowBolt"] = "crossbowammo",
 	["impactmine"] = "impactmine",
-	["chemical"] = "chemical"
+	["chemical"] = "chemical",
+    ["scrap"] = "scrapammo"
 }
 
 GM.WeaponStatBarVals = {

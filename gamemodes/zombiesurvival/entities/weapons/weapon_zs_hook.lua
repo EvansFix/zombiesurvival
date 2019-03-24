@@ -69,7 +69,7 @@ function SWEP:OnMeleeHit(hitent, hitflesh, tr)
 		if ent:IsValid() then
 			ent:SetPos(tr.HitPos)
 			ent.BaseWeapon = self:GetClass()
-			ent.Weaken = true
+			ent.Weaken = self.Weaken
 			ent:Spawn()
 			ent.BleedPerTick = 2
 			ent.TicksRemaining = 20

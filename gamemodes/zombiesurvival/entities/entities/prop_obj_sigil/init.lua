@@ -64,8 +64,8 @@ function ENT:OnTakeDamage(dmginfo)
 	if attacker:IsValid() and attacker:IsPlayer() and dmginfo:GetDamage() > 2 and CurTime() >= self.HealthLock then
 		if self:CanBeDamagedByTeam(attacker:Team()) then
 			if attacker:Team() == TEAM_HUMAN then
-				local dmgtype = dmginfo:GetDamageType()
-				if bit.band(dmgtype, DMG_SLASH) ~= 0 or bit.band(dmgtype, DMG_CLUB) ~= 0 then
+				local inflictor = dmginfo:GetInflictor()
+				if inflictor and inflictor == attacker:GetActiveWeapon() and inflictor.IsMelee then
 					dmginfo:SetDamage(dmginfo:GetDamage() * 1.6)
 				else
 					dmginfo:SetDamage(0)

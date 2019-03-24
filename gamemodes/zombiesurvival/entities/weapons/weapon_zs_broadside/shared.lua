@@ -63,7 +63,7 @@ GAMEMODE:AddNewRemantleBranch(SWEP, 1, "'Salvo' Micro-missile Launcher", "Rapidl
 
 	wept.PrimaryAttack = function(self)
 		if not self:CanPrimaryAttack() then return end
-		self:SetNextPrimaryFire(CurTime() + self.Primary.Delay)
+		self:SetNextPrimaryFire(CurTime() + self:GetFireDelay())
 		self:EmitFireSound()
 
 		local altuse = self:GetDTInt(10)

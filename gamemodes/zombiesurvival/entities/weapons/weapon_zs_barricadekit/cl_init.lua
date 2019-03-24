@@ -1,8 +1,15 @@
 INC_CLIENT()
 
+local BaseClassGun = baseclass.Get("weapon_zs_base")
+
 SWEP.DrawCrosshair = false
 SWEP.ViewModelFOV = 70
 SWEP.ViewModelFlip = false
+
+SWEP.HUD3DPos = Vector(4, 0, 15)
+SWEP.HUD3DAng = Angle(0, 180, 180)
+SWEP.HUD3DScale = 0.06
+SWEP.HUD3DBone = "base"
 
 function SWEP:DrawHUD()
 	local wid, hei = 384, 16
@@ -25,6 +32,29 @@ function SWEP:Deploy()
 	self.IdleAnimation = CurTime() + self:SequenceDuration()
 
 	return true
+end
+
+function SWEP:PostDrawViewModel(vm)
+	BaseClassGun.PostDrawViewModel(self, vm)
+end
+
+function SWEP:GetHUD3DPos(vm)
+	return BaseClassGun.GetHUD3DPos(self, vm)
+end
+
+local colBG = Color(16, 16, 16, 90)
+local colRed = Color(220, 0, 0, 230)
+local colWhite = Color(220, 220, 220, 230)
+
+function SWEP:Draw3DHUD(vm, pos, ang)
+	local wid, hei = 180, 64
+	local x, y = wid * -0.6, hei * -0.5
+	local spare = self:GetPrimaryAmmoCount()
+
+	cam.Start3D2D(pos, ang, self.HUD3DScale / 2)
+		draw.RoundedBoxEx(32, x, y, wid, hei, colBG, true, false, true, false)
+		draw.SimpleTextBlurry(spare, spare >= 1000 and "ZS3D2DFontSmall" or "ZS3D2DFont", x + wid * 0.5, y + hei * 0.5, spare == 0 and colRed or colWhite, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+	cam.End3D2D()
 end
 
 function SWEP:GetViewModelPosition(pos, ang)
